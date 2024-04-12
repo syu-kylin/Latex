@@ -1,0 +1,68 @@
+% !TeX root = ../latex-talk.tex
+
+\title{如何使用 beamer 制作学术报告幻灯片}
+\subtitle{上海交通大学图书馆专题培训讲座}
+\author{李子龙}
+\institute[SJTU Linux User Group]{上海交通大学 Linux 用户组}
+\date{2022 年 5 月}
+\subject{LaTeX, 幻灯片制作, SJTUBeamer}
+\maketitle
+
+\providecommand{\TikZ}{Ti\textit{k}Z}
+\providecommand{\pgf}{\textsc{pgf}}
+\providecommand{\pgfplots}{\textsc{pgfplots}}
+\providecommand{\pgfplotstable}{\textsc{PgfplotsTable}}
+
+\begin{frame}{关于}
+  \begin{columns}[c]
+  \begin{column}{.7\textwidth}
+    \begin{block}{如何使用 beamer 制作学术报告幻灯片}
+    \alert{\url{https://github.com/sjtug/sjtulib-latex-talk}}
+    
+    \begin{flushleft}
+      \small 介绍 \LaTeX{} 幻灯片模板 \textsc{SJTUBeamer} 的使用方法，以及 \LaTeX{} 图形绘制的简明方法，帮助学生制作出像模像样的学术幻灯片。
+    \end{flushleft}
+
+    \begin{tabular*}{0.8\linewidth}{@{\extracolsep{\fill}}lll@{}}
+      \scriptsize 最后更新 & \scriptsize 幻灯片下载 & \scriptsize 许可证 \\
+      \today & Overleaf \link{https://www.overleaf.com/read/fvwxzvcxhcwd} & \href{https://creativecommons.org/licenses/by-sa/4.0/}{\faCreativeCommons\,\faCreativeCommonsBy\,\faCreativeCommonsSa} \\ 
+    \end{tabular*}
+    \end{block}
+    \vspace{0.2cm}
+  \end{column}
+  \begin{column}{.3\textwidth}
+    \qrcode[hyperlink, height=4cm]{https://www.overleaf.com/read/fvwxzvcxhcwd}
+  \end{column}
+  \end{columns}
+  \note{5 月 18 日下午 3:00。扫描二维码进入 Overleaf 页面，由于 Overleaf 编译时间的限制，到讲座结束后的一周内都只开放本次讲座的下载，之后该链接将恢复上一讲的内容，之后需要下载讲义请前往 \href{https://github.com/sjtug/sharing}{sjtug/sharing} 下载，或者手动从 \href{https://github.com/sjtug/sjtulib-latex-talk}{sjtug/sjtulib-latex-talk} 源代码编译。}
+\end{frame}
+
+\begin{frame}
+  \frametitle{讲稿主要参考}
+  \begin{bibliolist}{00}
+    \onlineitem 吕荐瑞.
+    \newblock \LaTeX{} 文档排版教程[EB/OL].
+    \newblock 2018. \url{https://lvjr.bitbucket.io/tutorial/learn-latex.pdf}
+
+    \note[item]{这个教程讲的 beamer 就相对较多，\TikZ{} 也不少。}
+    
+    \onlineitem 朱俸民.
+    \newblock \TikZ{} 画“图”指南[EB/OL].
+    \newblock 2020. \url{https://tuna.moe/event/2020/tikz/}
+
+    \note[item]{专门讲 \TikZ{} 的讲座。}
+
+    \onlineitem \textsc{Hansimov}. 
+    \newblock 如何加速 \LaTeX{} 编译[EB/OL].
+    \newblock 2019. \url{https://zhuanlan.zhihu.com/p/55043560}
+    
+    \note[item]{知乎也是 \LaTeX{} 大佬云集的地方。这位也是我们交大已经毕业的学长。}
+  \end{bibliolist}
+\end{frame}
+
+\include{support/contents/sjtubeamer}
+\include{support/contents/visualization}
+\include{support/contents/boost}
+
+\def\bottomthanks{Happy \LaTeX{}ing!}
+\makebottom

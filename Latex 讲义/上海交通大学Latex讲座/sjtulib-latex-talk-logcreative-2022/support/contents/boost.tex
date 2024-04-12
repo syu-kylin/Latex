@@ -1,0 +1,185 @@
+% !TeX root = ../../latex-talk.tex
+
+\part{\LaTeX{} 无止境}
+
+\begin{frame}
+  \frametitle{宏包}
+
+  \begin{itemize}
+    \item 绝大多数 \LaTeX{} 宏包发布于 CTAN (Comprehensive \TeX{} Archive Network) \link{https://www.ctan.org/}，1992 年建站以来，至今已经吸引 2855 名贡献者发布其 6215 个宏包。 
+    \item 基本不敢写精通 \LaTeX{} \sout{（虽然没有什么大用}
+    \note{正如一般不会在简历上写精通 C++ 一样。但是正如之前的 \TeX{}works 虽然不怎么好用一样，它更多地提供的是一种基础通用性，对于像开发类似软件的程序员来说这是一个思考的起点，\LaTeX{} 对于熟悉于代码编写的人来说是一种更好的选择。}
+    \item 可以通过编写宏来简化输入，可以阅读 \pkg{clsguide}\footnote{（中文版）\textsc{Laughcry}~译. 写给 \LaTeXe{} 类与宏包的作者[EB/OL]. 2010. \link{https://github.com/CTeX-org/ctex-doc/blob/master/clsguide-zh-cn/clsguide-zh-cn.tex}}, 
+    \pkg{xparse}\footnote{（中文版）盛文博~译. \pkg{xparse} 宏包：进行文档命令解析[EB/OL]. 2018. \link{https://github.com/WenboSheng/LaTeX3-doc-cn/blob/master/xparse-doc-cn/xparse-cn.pdf}} 文档。
+  \end{itemize}
+
+  \begin{exampleblock}{定义宏举例}
+    \begin{description}
+      \item[\TeX] \cmd{def}\texttt{\textbackslash{}foo}\#1\#2\{\#1 of \#2\}
+      \item[\LaTeXe] \cmd{newcommand}\texttt{\textbackslash{}foo}[2]\{\#1 of \#2\}
+      \item[\LaTeX3] \cmd{NewDocumentCommand}\texttt{\textbackslash{}foo}\{mm\}\{\#1 of \#2\}
+    \end{description}
+  \end{exampleblock}
+
+  \note{简单了解即可，还可以设定可选参数，可以参见文档。}
+
+  \note{宏包不是使用的越多越好，实际使用的包并没有想象的那么多。慢慢熟悉这些宏包的功能才有可能加快编译速度。}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{错误}
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \begin{codeblock}[]{未定义命令}
+\newcommand\mycommand{\textbold{hmmm}}
+My command is used here \mycommand.
+      \end{codeblock}
+      \begin{codeblock}[]{括号不配对}
+\usepackage[leqno}{amsmath}
+      \end{codeblock}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{codeblock}[]{文件缺失}
+\usepackage{amsmathz}
+      \end{codeblock}
+      \begin{codeblock}[]{数学模式有空行}
+\begin{equation}
+
+  1=2
+
+\end{equation}
+      \end{codeblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{错误}
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \begin{block}{未定义命令}
+        \begin{lstlisting}
+! Undefined control sequence.
+\mycommand ->\textbold 
+                        {hmmm}
+l.8 My command is used here \mycommand
+                                      .
+? 
+        \end{lstlisting}
+      \end{block}
+      \begin{block}{括号不配对}
+        \begin{lstlisting}
+! Argument of \@fileswith@ptions has an extra }.
+        \end{lstlisting}
+      \end{block}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{block}{文件缺失}
+        \begin{lstlisting}
+! LaTeX Error: File `amsmathz.sty' not found.
+        \end{lstlisting}
+        \note{检查是否安装了该宏包。或者宏包是否在搜索路径内。}
+      \end{block}
+      \begin{block}{数学模式有空行}
+        \begin{lstlisting}
+! Missing $ inserted.
+        \end{lstlisting}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{编译速度}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{exampleblock}{\faWindows}
+        \begin{itemize}
+          \item \hologo{pdfLaTeX} 仍是目前最快的。
+          \item 中文支持方面需要做变通方法。
+          \item I/O 速度成为瓶颈。
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{exampleblock}{\faLinux{} \faApple}
+        \begin{itemize}
+          \item \hologo{XeLaTeX} 已经足够快。
+          \item \CTeX{} 需要 \hologo{XeLaTeX} 或 \hologo{LuaLaTeX}。
+          \item 主要取决于单核性能。
+        \end{itemize}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{文章}
+        \begin{itemize}
+          \item \LaTeX{} 的主要设计用途。
+          \item \hologo{pdfLaTeX}, \hologo{XeLaTeX} 和 \hologo{LuaLaTeX} 理想状态下速度差距不大 \link{https://stone-zeng.github.io/2019-07-24-tex-benchmark/}。
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{幻灯}
+        \begin{itemize}
+          \item \LaTeX{} 的图形偏门流派。
+          \item 由于 \textsc{pgf} 的引入使得 \hologo{LuaLaTeX} 明显偏慢。
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \note[item]{\hologo{pdfLaTeX} 中文方面需要做变通方法的意思是，打字的时候汉字与英文之间要留空格，尽量少换行（否则可能会导致额外的空格，视设置而定）。}
+
+  \note[item]{魔兽争霸 3 当年出来的时候战役模式是主流，后来大家都开始打 RPG, PVP, DotA（没错，发源地），自定义的一些内容也可以很精彩。}
+
+  \note[item]{用 PowerPoint 做完幻灯片会有一种空虚感，因为可能会做大量的重复工作。而 beamer 如果使用的好的话不会。}
+\end{frame}
+
+\begin{frame}
+  \frametitle{加速轮子}
+  \begin{columns}
+    \begin{column}{0.33\textwidth}
+      \begin{exampleblock}{ReportBoost \link{https://github.com/LogCreative/ReportBoost}}
+        \begin{tabular}{p{0.9\textwidth}}
+          提供一个已经配置完备的 Visual Studio Code 预编译工程目录。\\
+          \midrule
+          主要使用 \hologo{eTeX} 对 \hologo{pdfLaTeX} 在 \faWindows{} 上转储头文件为一个中间文件，减少 I/O 操作。
+          \note{\hologo{eTeX} 是原生 \TeX{} 的扩展版本，支持更多的字符数，\hologo{XeTeX} 和 \hologo{LuaTeX} 基于其演变而来。}\\
+          \midrule
+          对 \hologo{XeLaTeX} 和 \hologo{LuaLaTeX} 支持不佳。
+        \end{tabular}
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.33\textwidth}
+      \begin{exampleblock}{AutoBeamer \link{https://github.com/LogCreative/AutoBeamer}}
+        \begin{tabular}{p{0.9\textwidth}}
+          主要提供将 \faMarkdown{} 文件翻译为 \LaTeX{} \cls{beamer} 代码的功能。\\
+          \midrule
+          \pkg{pandoc} \link{https://pandoc.org/index.html} 也可以将 \faMarkdown{} 转换为 \LaTeX{} 幻灯片代码，但结果不够干净。\\
+          \midrule
+          使用网页脚本语言 \faJs{} 造轮子主要考虑跨平台与未来功能迁移的可能。
+        \end{tabular}
+      \end{exampleblock}
+    \end{column}
+    \begin{column}{0.33\textwidth}
+      \begin{exampleblock}{BeamerBoost \link{https://github.com/LogCreative/BeamerBoost}}
+        \begin{tabular}{p{0.9\textwidth}}
+          主要提供对 \cls{beamer} 文档类自然切割单位（帧）的脏区与并行渲染实现，更早拿到每帧结果。\\
+          \midrule
+          目前只能采用预编译的手段减少进程切换开销，主要面向 \faWindows{} 编译较慢情况的预览。\\
+          \midrule
+          导航栏结果未必准确。
+        \end{tabular}
+      \end{exampleblock}
+    \end{column}
+  \end{columns}
+
+  \note{这些程序还都处于相互分离的阶段。但是也可以看到这种使用 Unix 哲学所涉及的程序带来的好处：每一个程序只做好一件事。模块化、尽可能使用文本输入输出流有助于程序的构建与修改，每一个部分都可以换成新的零件。}
+
+  \note{beamer（与动画 \pkg{animate}） 可能是目前 \LaTeX{} 方面唯一有可能并行化的东西。}
+
+  \note{当然如果完成这一步的话，就做出来一个 PowerPoint 了。}
+\end{frame}
